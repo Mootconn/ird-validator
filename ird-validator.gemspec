@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
     s.description = "A validator for New Zealand tax numbers (IRD)"
     s.authors     = ["Theo Morra"]
     s.email       = 'theo@theom.nz'
-    spec.required_ruby_version = '>= 2.4.0'
+    s.required_ruby_version = '>= 2.4.0'
     s.files       = ["lib/validator.rb"]
     s.homepage    =
       'https://github.com/td512/ird-validator'

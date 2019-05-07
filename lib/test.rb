@@ -1,4 +1,4 @@
-require './validator.rb'
+require './ird-validator.rb'
 validate_zero = IRD::Validator.validate('00-000-000')
 validate_eight = IRD::Validator.validate('49-098-576')
 validate_nine = IRD::Validator.validate('136-410-132')

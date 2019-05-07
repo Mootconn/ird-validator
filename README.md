@@ -1,4 +1,4 @@
-# nz-ird-validator
+# ird-validator
 
 [![gem](https://img.shields.io/gem/v/ird-validator.svg)](https://rubygems.org/gems/ird-validator)
 

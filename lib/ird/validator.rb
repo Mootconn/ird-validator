@@ -1,35 +1,36 @@
 module IRD
   module Validator
-    def self.validate(irdnum)
-      ird = (irdnum.is_a? Integer) ? irdnum : irdnum.gsub!('-', '').to_i 
-      ird = irdnum.to_i if ird == 0
-      return false if ird < 10000000 || ird > 150000000
-      last_digit = ird.to_s[-1].to_i
-      number = ird.to_s[0..-2].to_s.rjust(8, '0').to_i
-      check_digit = self.weighted_check(ird, 32765432)
-      if check_digit < 10 
-        return check_digit == last_digit
-      else
-        second_check = self.weighted_check(ird, 74325276)
-        if second_check < 10 
-          return second_check == last_digit
-        else
-          return false
-        end
-      end
+		FIRST_WEIGHT = 32765432.freeze
+		SECOND_WEIGHT = 74325276.freeze
+
+    def self.validate(ird_number)
+      ird_number = (ird_number.is_a? Integer) ? ird_number : ird_number.gsub('-', '').to_i 
+      return false if ird_number < 10000000 || ird_number > 150000000
+
+      last_digit = ird_number % 10
+      main_number = ird_number / 10 # ruby integer division is flooring division
+      
+			first_check = self.weighted_check(main_number, FIRST_WEIGHT)
+			return first_check == last_digit if first_check < 10
+
+			second_check = self.weighted_check(main_number, SECOND_WEIGHT)
+			# no point checking whether it's 10, last digit is always between 0 and 9
+			return second_check == last_digit
     end
-    def self.weighted_check(irdnum, weight)
-        counter = 0
-        check = Array.new
-        check_digit = irdnum.to_s.chars.each do |v| 
-          check.push(v.to_i * weight.to_s.split('')[counter+1].to_i) if irdnum.to_s.count('0123456789') == 8
-          check.push(v.to_i * weight.to_s.split('')[counter].to_i) if irdnum.to_s.count('0123456789') == 9
-          counter += 1
-        end
-        counter = 0
-        check_final = check.inject(0, :+) % 11
-        return 0 if (check_final === 0)
-        return 11 - check_final
+
+    def self.weighted_check(number, weight)
+			checksum = 0
+
+			# if we have 0 after dividing by 10 there is nothing else to do.
+			while number > 0
+				checksum += (number % 10) * (weight % 10)
+
+				# discard the digits we've summed up already
+				number = number / 10
+				weight = weight / 10
+			end
+
+			return (-checksum) % 11 
     end
   end
 end

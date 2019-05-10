@@ -10,15 +10,15 @@ RSpec.describe IRD::Validator do
 	end
 
 	it "rejects invalid eight digit IRD numbers" do
-
+		expect(IRD::Validator.validate '49-098-572').to eq(false)
 	end
 
 	it "rejects invalid nine digit IRD numbers" do
-		expect(IRD::Validator.validate '100-000-000').to be(false)
+		expect(IRD::Validator.validate '100-000-000').to eq(false)
 	end
 
 	it "accepts valid eight digit IRD numbers" do
-		expect(IRD::Validator.validate '49-098-576').to be(true)
+		expect(IRD::Validator.validate '49-098-576').to eq(true)
 	end
 
 	it "accepts valid nine digit IRD numbers" do

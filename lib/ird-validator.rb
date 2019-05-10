@@ -1,7 +1,8 @@
 module IRD
   class Validator
     def self.validate(irdnum)
-      ird = irdnum.gsub!('-', '').to_i
+      ird = (irdnum.is_a? Integer) ? irdnum : irdnum.gsub!('-', '').to_i 
+      ird = irdnum.to_i if ird == 0
       return false if ird < 10000000 || ird > 150000000
       last_digit = ird.to_s[-1].to_i
       number = ird.to_s[0..-2].to_s.rjust(8, '0').to_i

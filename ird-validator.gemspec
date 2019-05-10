@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
     s.name        = 'ird-validator'
-    s.version     = '1.0.1'
-    s.date        = '2019-05-07'
+    s.version     = '1.0.4'
+    s.date        = '2019-05-10'
     s.summary     = "A validator for New Zealand tax numbers (IRD)"
     s.description = "A validator for New Zealand tax numbers (IRD)"
     s.authors     = ["Theo Morra"]

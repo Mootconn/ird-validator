@@ -23,6 +23,20 @@ IRD::Validator.validate('00-000-000') # 8 digit IRD Number
 IRD::Validator.validate('000-000-000') # 9 digit IRD Number
 ```
 
+* ActiveModel validator
+
+```
+require 'ird/active_model_validator'
+
+class User
+  include ::ActiveModel::Validations
+
+  attr_accessor :ird_number
+
+  validates :ird_number, ird: true
+end
+```
+
 ## Algorithm
 
 The algorithm is based on the 'Non-Resident Withholding Tax And Resident Withholding Tax Specification Document' issued by the Inland Revenue on the 31st of March 2016.

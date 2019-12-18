@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "ird/validator"
+require "ird/active_model_validator"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
